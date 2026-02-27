@@ -20,12 +20,16 @@ This project analyzes the behavior and performance of retail crypto traders acro
    ```bash
    git clone <your-repo-url>
    cd trader-sentiment-analysis
-Create a virtual environment (Recommended):
-
-'''bash
+### 2. Create a virtual environment (Recommended):
+```bash
 python -m venv venv
-# On Windows use: venv\Scripts\activate
-# On Mac/Linux use: source venv/bin/activate
+
+# On Windows use: 
+venv\Scripts\activate
+
+# On Mac/Linux use: 
+source venv/bin/activate
+
 Install dependencies:
 Create a requirements.txt file in your root folder with the following packages, then run the install command:
 
@@ -91,3 +95,4 @@ Action: Systematically reduce the maximum daily trades allowed for that specific
 
 
 Why: Over-trading during fearful, choppy markets without a strict directional edge leads to amplified losses ("death by a thousand cuts"). Restricting frequency forces selectivity and protects capital in low-probability environments.
+
