@@ -20,8 +20,8 @@ This project analyzes the behavior and performance of retail crypto traders acro
    ```bash
    git clone <your-repo-url>
    cd trader-sentiment-analysis
-### 2. Create a virtual environment (Recommended):
-```bash
+2. Create a virtual environment (Recommended)
+Bash
 python -m venv venv
 
 # On Windows use: 
@@ -29,11 +29,10 @@ venv\Scripts\activate
 
 # On Mac/Linux use: 
 source venv/bin/activate
+3. Install dependencies
+Create a requirements.txt file in your root folder with the following packages:
 
-Install dependencies:
-Create a requirements.txt file in your root folder with the following packages, then run the install command:
-
-'''Plaintext
+Plaintext
 pandas
 numpy
 scikit-learn
@@ -42,6 +41,8 @@ seaborn
 streamlit
 altair
 joblib
+Then, run the install command:
+
 Bash
 pip install -r requirements.txt
 🚀 How to Run
@@ -93,6 +94,4 @@ Trigger: Sentiment drops to Fear AND a trader's rolling Win Rate drops below 45%
 
 Action: Systematically reduce the maximum daily trades allowed for that specific user account.
 
-
 Why: Over-trading during fearful, choppy markets without a strict directional edge leads to amplified losses ("death by a thousand cuts"). Restricting frequency forces selectivity and protects capital in low-probability environments.
-
