@@ -98,3 +98,8 @@ Action: Systematically reduce the maximum daily trades allowed for that specific
 
 Why: Over-trading during fearful, choppy markets without a strict directional edge leads to amplified losses ("death by a thousand cuts"). Restricting frequency forces selectivity and protects capital in low-probability environments.
 
+
+DASHBOARD:
+![Dashboard1](https://github.com/user-attachments/assets/e5c75ffb-a235-4f40-8cb3-3b6990504ea7)
+![Dashboard2](https://github.com/user-attachments/assets/a0a91319-b740-4272-9b19-6120ceed683e)
+
