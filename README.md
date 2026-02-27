@@ -45,6 +45,7 @@ Then, run the install command:
 
 Bash
 pip install -r requirements.txt
+
 🚀 How to Run
 Step 1: Execute the Data Pipeline
 Run the Jupyter Notebook to process the raw data, generate features, and run the clustering models.
@@ -62,6 +63,7 @@ Once the data is processed, launch the Streamlit app to explore the visual insig
 
 Bash
 streamlit run streamlit_app.py
+
 🧠 Executive Summary & Methodology
 Methodology
 Data Alignment & Cleaning: Trades were converted from Unix timestamps to daily dates and aligned with the daily Fear & Greed Index. Missing values were handled, and string formats (like trade direction) were standardized to calculate Long/Short ratios.
@@ -95,3 +97,4 @@ Trigger: Sentiment drops to Fear AND a trader's rolling Win Rate drops below 45%
 Action: Systematically reduce the maximum daily trades allowed for that specific user account.
 
 Why: Over-trading during fearful, choppy markets without a strict directional edge leads to amplified losses ("death by a thousand cuts"). Restricting frequency forces selectivity and protects capital in low-probability environments.
+
