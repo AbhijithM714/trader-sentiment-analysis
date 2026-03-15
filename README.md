@@ -1,38 +1,62 @@
 # Trader Performance vs. Market Sentiment Analysis 📈
 
-This project analyzes the behavior and performance of retail crypto traders across different market sentiment regimes (Fear vs. Greed). It features a robust data preprocessing pipeline, behavioral segmentation (clustering), and an interactive Streamlit dashboard to explore actionable trading strategies.
+Analyzes retail crypto trader behavior and performance across different market sentiment regimes (Fear vs. Greed). Features a robust data preprocessing pipeline, behavioral segmentation via clustering, and an interactive Streamlit dashboard for exploring actionable trading strategies.
+
+---
 
 ## 📂 Project Structure
 
-* `data/raw/`: Contains the initial raw datasets (`historical_data.csv`, `fear_greed_index.csv`).
-* `data/processed/`: Contains the cleaned, merged, and engineered datasets outputted by the pipeline.
-* `src/`: Core Python modules for the data pipeline (`data_loader.py`, `preprocessing.py`, `feature_engineering.py`, `segmentation.py`, `models.py`, `utils.py`).
-* `analysis.ipynb`: The main Jupyter Notebook demonstrating the end-to-end workflow, data quality checks, predictive modeling, and clustering.
-* `streamlit_app.py`: The interactive Streamlit dashboard for exploring metrics, filtering by sentiment, and viewing strategic insights.
+```
+trader-sentiment-analysis/
+├── data/
+│   ├── raw/               # Initial raw datasets (historical_data.csv, fear_greed_index.csv)
+│   └── processed/         # Cleaned, merged, and engineered datasets
+├── src/                   # Core Python modules
+│   ├── data_loader.py
+│   ├── preprocessing.py
+│   ├── feature_engineering.py
+│   ├── segmentation.py
+│   ├── models.py
+│   └── utils.py
+├── analysis.ipynb         # End-to-end workflow: data quality, modeling, clustering
+├── streamlit_app.py       # Interactive dashboard
+└── requirements.txt
+```
 
 ---
 
 ## ⚙️ Setup & Installation
 
-**Prerequisites:** Python 3.9+ 
+**Prerequisites:** Python 3.9+
 
-1. **Clone the repository** (or download the folder):
-   ```bash
-   git clone <your-repo-url>
-   cd trader-sentiment-analysis
-2. Create a virtual environment (Recommended)
-Bash
+### 1. Clone the repository
+
+```bash
+git clone <your-repo-url>
+cd trader-sentiment-analysis
+```
+
+### 2. Create a virtual environment (recommended)
+
+```bash
 python -m venv venv
 
-# On Windows use: 
+# Windows
 venv\Scripts\activate
 
-# On Mac/Linux use: 
+# Mac / Linux
 source venv/bin/activate
-3. Install dependencies
-Create a requirements.txt file in your root folder with the following packages:
+```
 
-Plaintext
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+**`requirements.txt`**
+
+```
 pandas
 numpy
 scikit-learn
@@ -41,65 +65,70 @@ seaborn
 streamlit
 altair
 joblib
-Then, run the install command:
+```
 
-Bash
-pip install -r requirements.txt
+---
 
-🚀 How to Run
-Step 1: Execute the Data Pipeline
-Run the Jupyter Notebook to process the raw data, generate features, and run the clustering models.
+## 🚀 How to Run
 
-Launch Jupyter:
+### Step 1 — Execute the Data Pipeline
 
-Bash
+Run the Jupyter Notebook to process raw data, generate features, and train clustering models.
+
+```bash
 jupyter notebook
-Open analysis.ipynb and Run All Cells.
+```
 
-Verify that merged_data.csv is successfully generated in the data/processed/ folder.
+Open `analysis.ipynb` and **Run All Cells**.
 
-Step 2: Launch the Interactive Dashboard
-Once the data is processed, launch the Streamlit app to explore the visual insights.
+Verify that `merged_data.csv` is generated in `data/processed/`.
 
-Bash
+### Step 2 — Launch the Interactive Dashboard
+
+```bash
 streamlit run streamlit_app.py
+```
 
-🧠 Executive Summary & Methodology
-Methodology
-Data Alignment & Cleaning: Trades were converted from Unix timestamps to daily dates and aligned with the daily Fear & Greed Index. Missing values were handled, and string formats (like trade direction) were standardized to calculate Long/Short ratios.
+---
 
-Note on Feature Engineering: Because "Leverage" is a critical behavioral metric for risk evaluation but was absent from the raw dataset, a highly realistic log-normal distribution for leverage (skewed right, mimicking typical retail behavior) was simulated during preprocessing. This demonstrates feature engineering capabilities and enables realistic strategy development.
+## 🧠 Methodology
 
-Metric Aggregation: Calculated daily PnL, Win Rates, trade frequencies, average trade sizes, and Drawdown proxies (worst single trade PnL per day).
+| Stage | Description |
+|---|---|
+| **Data Alignment & Cleaning** | Trades converted from Unix timestamps to daily dates and aligned with the daily Fear & Greed Index. Missing values handled; trade direction strings standardized to calculate Long/Short ratios. |
+| **Feature Engineering** | Leverage (absent from raw data) was simulated via a log-normal distribution skewed right to mimic typical retail behavior. Enables realistic risk evaluation and strategy development. |
+| **Metric Aggregation** | Calculated daily PnL, win rates, trade frequencies, average trade sizes, and drawdown proxies (worst single-trade PnL per day). |
+| **Segmentation & Modeling** | Traders grouped into archetypes (e.g., *High-Risk Gambler*, *Consistent Grinder*) using K-Means clustering on risk vs. reward dimensions. A baseline predictive model forecasts next-day profitability. |
 
-Segmentation & Modeling: Traders were grouped into archetypes (e.g., "High-Risk Gambler", "Consistent Grinder") using K-Means clustering based on risk (leverage/trade size) vs. reward (win rate/PnL). A baseline predictive model was also trained to forecast next-day profitability.
+---
 
-📊 Key Insights
-The Pareto Profitability: A very small fraction of accounts drive the vast majority of the aggregate positive PnL. The overall market relies heavily on these high-performing outliers, meaning the "average" retail trader operates at a steady loss.
+## 📊 Key Insights
 
-The Win Rate Reality: The highest concentration of retail traders systematically falls below the 50% success mark. Long-term profitability relies entirely on strict Reward-to-Risk ratios (minimizing drawdowns), rather than high prediction accuracy.
+**The Pareto Profitability**
+A very small fraction of accounts drive the vast majority of aggregate positive PnL. The overall market relies heavily on high-performing outliers — the average retail trader operates at a steady loss.
 
-Sentiment Drag: During prolonged 'Fear' regimes, aggregate Cumulative PnL flattens or experiences sharp drawdowns. General market panic restricts upside momentum and limits retail edge, causing traders to get chopped out of positions.
+**The Win Rate Reality**
+The highest concentration of retail traders falls below the 50% success mark. Long-term profitability depends entirely on strict reward-to-risk ratios and minimizing drawdowns, not prediction accuracy.
 
-🎯 Actionable Strategy Recommendations
-Rule 1: Dynamic Position Sizing & Leverage Capping
+**Sentiment Drag**
+During prolonged Fear regimes, aggregate cumulative PnL flattens or experiences sharp drawdowns. Market panic restricts upside momentum and limits retail edge, causing traders to get chopped out of positions.
 
-Trigger: Market Sentiment Index drops into Fear or Extreme Fear.
+---
 
-Action: Algorithmically reduce maximum allowable trade sizes and hard-cap leverage at 5x for the active trader segment.
+## 🎯 Actionable Strategy Recommendations
 
-Why: Downside volatility spikes significantly during Fear regimes. Uncapped leverage and undisciplined position sizing lead to account-liquidating drawdowns when market structure breaks down, as evidenced by the sharp drops in cumulative PnL during these periods.
+### Rule 1 — Dynamic Position Sizing & Leverage Capping
 
-Rule 2: Restrict Trade Frequency on High-Volatility Days
+| | |
+|---|---|
+| **Trigger** | Market Sentiment Index drops into *Fear* or *Extreme Fear* |
+| **Action** | Algorithmically reduce maximum allowable trade sizes and hard-cap leverage at **5×** for active traders |
+| **Rationale** | Downside volatility spikes significantly during Fear regimes. Uncapped leverage leads to account-liquidating drawdowns when market structure breaks down, as evidenced by sharp drops in cumulative PnL during these periods. |
 
-Trigger: Sentiment drops to Fear AND a trader's rolling Win Rate drops below 45%.
+### Rule 2 — Restrict Trade Frequency on High-Volatility Days
 
-Action: Systematically reduce the maximum daily trades allowed for that specific user account.
-
-Why: Over-trading during fearful, choppy markets without a strict directional edge leads to amplified losses ("death by a thousand cuts"). Restricting frequency forces selectivity and protects capital in low-probability environments.
-
-
-DASHBOARD:
-![Dashboard1](https://github.com/user-attachments/assets/e5c75ffb-a235-4f40-8cb3-3b6990504ea7)
-![Dashboard2](https://github.com/user-attachments/assets/a0a91319-b740-4272-9b19-6120ceed683e)
-
+| | |
+|---|---|
+| **Trigger** | Sentiment drops to *Fear* **AND** a trader's rolling win rate falls below **45%** |
+| **Action** | Reduce the maximum daily trades allowed for that specific user account |
+| **Rationale** | Over-trading in choppy, fearful markets without a strict directional edge amplifies losses. Restricting frequency forces selectivity and protects capital in low-probability environments. |
