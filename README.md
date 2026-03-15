@@ -132,5 +132,3 @@ During prolonged Fear regimes, aggregate cumulative PnL flattens or experiences 
 | **Trigger** | Sentiment drops to *Fear* **AND** a trader's rolling win rate falls below **45%** |
 | **Action** | Reduce the maximum daily trades allowed for that specific user account |
 | **Rationale** | Over-trading in choppy, fearful markets without a strict directional edge amplifies losses. Restricting frequency forces selectivity and protects capital in low-probability environments. |
-
-Dashboard:
